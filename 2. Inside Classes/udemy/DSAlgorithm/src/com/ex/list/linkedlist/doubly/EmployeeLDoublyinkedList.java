@@ -23,12 +23,45 @@ public class EmployeeLDoublyinkedList {
             tail = node;
         }else{
             head.setPrevious(node);
+            node.setNext(head);
         }
 
 
         head = node;
         size++;
 
+    }
+
+    public void addToEnd(Employee employee){
+        EmployeeDoublyNode node = new EmployeeDoublyNode(employee);
+        if(tail == null){
+            head = node;
+        }else {
+            tail.setNext(node);
+            node.setPrevious(tail);
+        }
+        tail = node ;
+        size++;
+
+    }
+
+    public EmployeeDoublyNode removeFromEnd(){
+        if(isEmpty()){
+            return null;
+        }
+        EmployeeDoublyNode removeNode = tail;
+
+        if(tail.getPrevious() == null){
+           //if this was get Next tail.getNext() will always be null
+            head = null;
+        }else{
+            tail.getPrevious().setNext(null);
+        }
+        tail = tail.getPrevious();
+        removeNode.setPrevious(null);
+        size--;
+
+        return removeNode;
     }
 
     public boolean isEmpty() {
